@@ -40,7 +40,25 @@ class BookController extends Controller
     public function update(Request $request, string $id)
     {
         $book = Book::findOrFail($id);
-        $book->update($request->all());
+
+        if ($request->isMethod('put')) {
+            $book->update($request->all());
+        } elseif ($request->isMethod('patch')) {
+            if ($request->has('title')) {
+                $book->title = $request->input('title');
+            }
+
+            if ($request->has('author')) {
+                $book->author = $request->input('author');
+            }
+
+            if ($request->has('genre')) {
+                $book->genre = $request->input('genre');
+            }
+
+            $book->save();
+        }
+
         return response()->json($book);
     }
 

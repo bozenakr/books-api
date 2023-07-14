@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('title');
             $table->string('author');
             $table->string('genre');
-            $table->timestamps();
         });
     }
 
@@ -26,5 +25,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('books');
+//        $table->dropTimestamps();
     }
 };
